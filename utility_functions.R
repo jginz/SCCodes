@@ -2,7 +2,7 @@
 ## Load Mouse cell cycle genes
 ###################################################################
 LoadMouseCellCycleGenes = function(){
-  load("codes/mm2Hs.rda")
+  load("https://github.com/jginz/SCCodes/blob/main/mm2Hs.rda")
   g2m.features=as.character(na.exclude(mm2Hs[match(cc.genes.updated.2019$g2m.genes,mm2Hs$Human),"Mouse"]))
   s.features=as.character(na.exclude(mm2Hs[match(cc.genes.updated.2019$s.genes,mm2Hs$Human),"Mouse"]))
   return(list(g2m.features=g2m.features,s.features=s.features))

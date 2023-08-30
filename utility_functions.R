@@ -2,7 +2,7 @@
 ## Load Mouse cell cycle genes
 ###################################################################
 LoadMouseCellCycleGenes = function(){
-  load("https://github.com/jginz/SCCodes/blob/main/mm2Hs.rda")
+  load("https://raw.githubusercontent.com/jginz/SCCodes/main/mm2Hs.rda")
   g2m.features=as.character(na.exclude(mm2Hs[match(cc.genes.updated.2019$g2m.genes,mm2Hs$Human),"Mouse"]))
   s.features=as.character(na.exclude(mm2Hs[match(cc.genes.updated.2019$s.genes,mm2Hs$Human),"Mouse"]))
   return(list(g2m.features=g2m.features,s.features=s.features))
@@ -236,7 +236,7 @@ RunSCType <- function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
   
   if(is.null(custom_gene_list)){
-    db_ = "https://github.com/jginz/SCCodes/blob/main/ScTypeDB_full.xlsx"
+    db_ = "https://raw.githubusercontent.com/jginz/SCCodes/main/ScTypeDB_full.xlsx"
     gs_list = gene_sets_prepare(db_,tissue_type)
   }else{
     db_ = custom_gene_list
@@ -321,7 +321,7 @@ RunSCType2 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
   
   if(is.null(custom_gene_list)){
-    db_ = "https://github.com/jginz/SCCodes/blob/main/ScTypeDB_full.xlsx"
+    db_ = "https://raw.githubusercontent.com/jginz/SCCodes/main/ScTypeDB_full.xlsx"
     gs_list = gene_sets_prepare(db_,tissue_type)
   }else{
     db_ = custom_gene_list
@@ -406,7 +406,7 @@ RunSCType3 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
   
   if(is.null(custom_gene_list)){
-    db_ = "https://github.com/jginz/SCCodes/blob/main/ScTypeDB_full.xlsx"
+    db_ = "https://raw.githubusercontent.com/jginz/SCCodes/main/ScTypeDB_full.xlsx"
     gs_list = gene_sets_prepare(db_,tissue_type)
   }else{
     db_ = custom_gene_list
@@ -481,7 +481,7 @@ RunSCType3 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
 
 ## Geneset file is a custom .gmt file
 ## Default number of cores = 2
-RunUCell = function(seu, geneset_file = "https://github.com/jginz/SCCodes/blob/main/acharya_genesets_mouse.gmt",ncores=2){
+RunUCell = function(seu, geneset_file = "https://raw.githubusercontent.com/jginz/SCCodes/main/acharya_genesets_mouse.gmt",ncores=2){
   gs = read.gmt(geneset_file)
   ES = enrichIt(obj = seu,gene.sets = gs, method = "UCell",groups = 1000, cores = ncores,min.size = 2)
   seu = AddMetaData(seu,ES)

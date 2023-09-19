@@ -21,31 +21,17 @@
 ## Check to see if the packages have already been installed and install them if necessary
 #########################################################################################
 LoadWorkshopLibs = function(){
-  # Load required packages
-  packages = c("Seurat", "BiocManager", "DoubletFinder", "reticulate", "plyr", "dplyr", "grid", "msigdbr", "ggplot2", "tibble", "HGNChelper", 
-               "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx")
+  # load libraries
+  packages = c("Seurat","BiocManager","DoubletFinder","reticulate", "PCAtools","plyr","dplyr","dittoSeq","grid","msigdbr","fgsea","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse", "data.tree","openxlsx","escape","qusage","UCell")
 
-  # Install packages that are not yet installed
+  # Install packages not yet installed
   installed_packages <- packages %in% rownames(installed.packages())
   if (any(installed_packages == FALSE)) {
-    new_packages <- packages[!installed_packages]
-    install.packages(new_packages[new_packages != "BiocManager"])  # Exclude BiocManager from CRAN installation
-    if("BiocManager" %in% new_packages) {
-      install.packages("BiocManager")
-    }
+    install.packages(packages[!installed_packages])
   }
-
-  # Install Bioconductor packages if not installed
-  bioconductor_packages <- c("qusage", "fgsea", "msigdbr", "PCAtools", "escape", "UCell","dittoSeq")
-  for(pkg in bioconductor_packages) {
-      BiocManager::install(pkg)
-    }
-
-  # Special case for GitHub package
-  if(!"DoubletFinder" %in% rownames(installed.packages())) {
+  if(!"DoubletFinder" %in% rownames(installed.packages())) 
     remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
-  }
-
-  # Load packages
-  invisible(lapply(c(bioconductor_packages,packages), library, character.only = TRUE))
+  
+  # Packages loading
+  invisible(lapply(packages, library, character.only = TRUE))
 }

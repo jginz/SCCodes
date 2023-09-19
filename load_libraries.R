@@ -22,8 +22,7 @@
 #########################################################################################
 LoadWorkshopLibs = function(){
   # Load required packages
-  packages = c("Seurat", "BiocManager", 
-               "dittoSeq", "DoubletFinder", "reticulate", "plyr", "dplyr", "grid", "msigdbr", "ggplot2", "tibble", "HGNChelper", 
+  packages = c("Seurat", "BiocManager", "DoubletFinder", "reticulate", "plyr", "dplyr", "grid", "msigdbr", "ggplot2", "tibble", "HGNChelper", 
                "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx")
 
   # Install packages that are not yet installed
@@ -39,10 +38,8 @@ LoadWorkshopLibs = function(){
   # Install Bioconductor packages if not installed
   bioconductor_packages <- c("qusage", "fgsea", "msigdbr", "PCAtools", "escape", "UCell","dittoSeq")
   for(pkg in bioconductor_packages) {
-    if (!pkg %in% rownames(installed.packages())) {
       BiocManager::install(pkg)
     }
-  }
 
   # Special case for GitHub package
   if(!"DoubletFinder" %in% rownames(installed.packages())) {

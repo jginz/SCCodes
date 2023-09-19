@@ -22,7 +22,7 @@
 #########################################################################################
 LoadWorkshopLibs = function(){
   # Load required packages
-  packages = c("Seurat", "qusage", "escape", "BiocManager", "fgsea", "PCAtools", 
+  packages = c("Seurat", "BiocManager", "fgsea", "PCAtools", 
                "dittoSeq", "DoubletFinder", "reticulate", "PCAtools", "plyr", "dplyr", 
                "dittoSeq", "grid", "msigdbr", "fgsea", "ggplot2", "tibble", "HGNChelper", 
                "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx", "escape", 

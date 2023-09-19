@@ -21,17 +21,36 @@
 ## Check to see if the packages have already been installed and install them if necessary
 #########################################################################################
 LoadWorkshopLibs = function(){
-  # load libraries
-  packages = c("Seurat","qusage","escape","BiocManager","fgsea","PCAtools","dittoSeq","DoubletFinder","reticulate", "PCAtools","plyr","dplyr","dittoSeq","grid","msigdbr","fgsea","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse", "data.tree","openxlsx","escape","qusage","UCell")
+  # Load required packages
+  packages = c("Seurat", "qusage", "escape", "BiocManager", "fgsea", "PCAtools", 
+               "dittoSeq", "DoubletFinder", "reticulate", "PCAtools", "plyr", "dplyr", 
+               "dittoSeq", "grid", "msigdbr", "fgsea", "ggplot2", "tibble", "HGNChelper", 
+               "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx", "escape", 
+               "qusage", "UCell")
 
-  # Install packages not yet installed
+  # Install packages that are not yet installed
   installed_packages <- packages %in% rownames(installed.packages())
   if (any(installed_packages == FALSE)) {
-    install.packages(packages[!installed_packages])
+    new_packages <- packages[!installed_packages]
+    install.packages(new_packages[new_packages != "BiocManager"])  # Exclude BiocManager from CRAN installation
+    if("BiocManager" %in% new_packages) {
+      install.packages("BiocManager")
+    }
   }
-  if(!"DoubletFinder" %in% rownames(installed.packages())) 
-    remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
 
-  # Packages loading
+  # Install Bioconductor packages if not installed
+  bioconductor_packages <- c("qusage", "fgsea", "msigdbr")
+  for(pkg in bioconductor_packages) {
+    if (!pkg %in% rownames(installed.packages())) {
+      BiocManager::install(pkg)
+    }
+  }
+
+  # Special case for GitHub package
+  if(!"DoubletFinder" %in% rownames(installed.packages())) {
+    remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
+  }
+
+  # Load packages
   invisible(lapply(packages, library, character.only = TRUE))
 }

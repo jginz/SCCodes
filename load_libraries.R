@@ -22,10 +22,9 @@
 #########################################################################################
 LoadWorkshopLibs = function(){
   # Load required packages
-  packages = c("Seurat", "BiocManager", "fgsea", "PCAtools", 
-               "dittoSeq", "DoubletFinder", "reticulate", "PCAtools", "plyr", "dplyr", 
-               "dittoSeq", "grid", "msigdbr", "fgsea", "ggplot2", "tibble", "HGNChelper", 
-               "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx", "escape", "UCell")
+  packages = c("Seurat", "BiocManager", 
+               "dittoSeq", "DoubletFinder", "reticulate", "plyr", "dplyr", "grid", "msigdbr", "ggplot2", "tibble", "HGNChelper", 
+               "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx")
 
   # Install packages that are not yet installed
   installed_packages <- packages %in% rownames(installed.packages())
@@ -38,7 +37,7 @@ LoadWorkshopLibs = function(){
   }
 
   # Install Bioconductor packages if not installed
-  bioconductor_packages <- c("qusage", "fgsea", "msigdbr")
+  bioconductor_packages <- c("qusage", "fgsea", "msigdbr", "PCAtools", "escape", "UCell","dittoSeq")
   for(pkg in bioconductor_packages) {
     if (!pkg %in% rownames(installed.packages())) {
       BiocManager::install(pkg)
@@ -51,5 +50,5 @@ LoadWorkshopLibs = function(){
   }
 
   # Load packages
-  invisible(lapply(packages, library, character.only = TRUE))
+  invisible(lapply(c(bioconductor_packages,packages), library, character.only = TRUE))
 }

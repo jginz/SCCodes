@@ -22,7 +22,7 @@
 #########################################################################################
 LoadWorkshopLibs = function(){
   # load libraries
-  packages = c("Seurat","DoubletFinder","PCAtools","plyr","dplyr","dittoSeq","grid","msigdbr","fgsea","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse", "data.tree","openxlsx","escape","qusage","UCell")
+  packages = c("Seurat","DoubletFinder","reticulate", "PCAtools","plyr","dplyr","dittoSeq","grid","msigdbr","fgsea","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse", "data.tree","openxlsx","escape","qusage","UCell")
 
   # Install packages not yet installed
   installed_packages <- packages %in% rownames(installed.packages())

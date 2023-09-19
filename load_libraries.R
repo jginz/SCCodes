@@ -25,8 +25,7 @@ LoadWorkshopLibs = function(){
   packages = c("Seurat", "BiocManager", "fgsea", "PCAtools", 
                "dittoSeq", "DoubletFinder", "reticulate", "PCAtools", "plyr", "dplyr", 
                "dittoSeq", "grid", "msigdbr", "fgsea", "ggplot2", "tibble", "HGNChelper", 
-               "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx", "escape", 
-               "qusage", "UCell")
+               "ggraph", "igraph", "tidyverse", "data.tree", "openxlsx", "escape", "UCell")
 
   # Install packages that are not yet installed
   installed_packages <- packages %in% rownames(installed.packages())

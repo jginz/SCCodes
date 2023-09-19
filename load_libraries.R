@@ -29,11 +29,13 @@ LoadWorkshopLibs = function(){
   if (any(installed_packages == FALSE)) {
     install.packages(packages[!installed_packages])
   }
-  if (any(installed_packages == FALSE)) {
-      BiocManager::install(packages[!installed_packages])
-    }
   if(!"DoubletFinder" %in% rownames(installed.packages())) 
     remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
+
+  installed_packages <- packages %in% rownames(installed.packages())
+    if (any(installed_packages == FALSE)) {
+      BiocManager::install(packages[!installed_packages])
+    }
   
   # Packages loading
   invisible(lapply(packages, library, character.only = TRUE))

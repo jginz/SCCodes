@@ -516,7 +516,7 @@ RunPseudoBulk = function(seu,grouping_variable="Clusters",return_as_Seurat=F){
 ## Percent of cells expressing gene of interest https://github.com/satijalab/seurat/issues/371#issuecomment-486384854
 ######################################################
 
-PrctCellExpringGene <- function(object, genes, group.by = "all", assay = "RNA", datatype = "counts", threshold = 0){
+PrctCellExpringGene <- function(object, genes, group.by = "all", assay = assay, datatype = "counts", threshold = 0){
   if(group.by == "all"){
     prct = unlist(lapply(genes,calc_helper, object=object, assay = assay, datatype=datatype, threshold=threshold))
     result = data.frame(Markers = genes, Cell_proportion = prct)

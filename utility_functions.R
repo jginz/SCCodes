@@ -81,12 +81,21 @@ RunDoubletFinder = function(seu){
 
 FindMinPCs = function(seu){
   feats = as.character(VariableFeatures(seu))
-  tmp = subset(seu,features=feats)
-  mat = as.matrix(tmp@assays$RNA@scale.data)
+  tmp = subset(seu, features=feats)
+  
+  if ("RNA" %in% names(tmp@assays)) {
+    mat = as.matrix(tmp@assays$RNA@scale.data)
+  } else if ("SCT" %in% names(tmp@assays)) {
+    mat = as.matrix(tmp@assays$SCT@scale.data)
+  } else {
+    stop("Neither RNA nor SCT assays are available in the Seurat object.")
+  }
+  
   p <- pca(mat, metadata = tmp@meta.data, removeVar = 0.1)
   elbow <- findElbowPoint(p$variance)
   return(as.numeric(elbow))
 }
+
 
 ###################################################################
 ## UMAP themes (plotting function)

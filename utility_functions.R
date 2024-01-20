@@ -84,9 +84,9 @@ FindMinPCs = function(seu){
   tmp = subset(seu, features=feats)
   
   if ("RNA" %in% names(tmp@assays)) {
-    mat = as.matrix(tmp@assays$RNA@scale.data)
+    mat = as.matrix(tmp@assays$RNA$scale.data)
   } else if ("SCT" %in% names(tmp@assays)) {
-    mat = as.matrix(tmp@assays$SCT@scale.data)
+    mat = as.matrix(tmp@assays$SCT$scale.data)
   } else {
     stop("Neither RNA nor SCT assays are available in the Seurat object.")
   }

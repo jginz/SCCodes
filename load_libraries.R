@@ -22,15 +22,25 @@
 #########################################################################################
 LoadWorkshopLibs = function(){
   # load libraries
-  packages = c("Seurat","BiocManager","DoubletFinder","reticulate", "PCAtools","plyr","dplyr","dittoSeq","grid","msigdbr","fgsea","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse", "data.tree","openxlsx","escape","qusage","UCell")
-
+  packages = c("Seurat","BiocManager", "harmony","devtools", "reticulate", "plyr","dplyr","grid","msigdbr","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse", "data.tree","openxlsx")
+  biocpackages = c("DoubletFinder","PCAtools","dittoSeq","fgsea","escape","qusage","UCell", "glmGamPoi")
   # Install packages not yet installed
   installed_packages <- packages %in% rownames(installed.packages())
   if (any(installed_packages == FALSE)) {
     install.packages(packages[!installed_packages])
   }
+
+  bioc_installed_packages = biocpackages %in% rownames(installed.packages())
+  if (any(bioc_installed_packages == FALSE)) {
+    BiocManager::install(biocpackages[!bioc_installed_packages])
+    }
+  
   if(!"DoubletFinder" %in% rownames(installed.packages())) 
     remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
+  
+  if(!"presto" %in% rownames(installed.packages())) 
+    devtools::install_github('immunogenomics/presto')
+
   
   # Packages loading
   invisible(lapply(packages, library, character.only = TRUE))

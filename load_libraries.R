@@ -44,4 +44,5 @@ LoadWorkshopLibs = function(){
   
   # Packages loading
   invisible(lapply(packages, library, character.only = TRUE))
+  invisible(lapply(biocpackages, library, character.only = TRUE))
 }

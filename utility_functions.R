@@ -508,7 +508,7 @@ RunSCTypeInt = function(seu,custom_gene_list=NULL,tissue_type="Immune system",pl
   }
   
   set.seed(1)
-  es.max = sctype_score(as.matrix(GetAssayData(seu, assay = "integrated", slot = "data")), scaled = FALSE,
+  es.max = sctype_score(as.matrix(GetAssayData(hbow.int, slot = "data")), scaled = FALSE,
                         gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
   
   cL_results = do.call("rbind", lapply(unique(seu@meta.data$Clusters), function(cl){

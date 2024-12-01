@@ -22,7 +22,7 @@
 #########################################################################################
 LoadWorkshopLibs = function(){
   # load libraries
-  packages = c("Seurat","BiocManager", "harmony","devtools", "reticulate", "plyr","dplyr","grid","msigdbr","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse","ggtree", "data.tree","openxlsx")
+  packages = c("Seurat","BiocManager", "harmony","devtools", "reticulate", "plyr","dplyr","grid","msigdbr","ggplot2","tibble","HGNChelper","ggraph","igraph","tidyverse","ggtree", "plotly", "data.tree","openxlsx")
   biocpackages = c("DoubletFinder","PCAtools","dittoSeq","fgsea","escape","qusage","UCell", "glmGamPoi")
   # Install packages not yet installed
   installed_packages <- packages %in% rownames(installed.packages())

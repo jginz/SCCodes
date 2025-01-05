@@ -1,7 +1,7 @@
 ########################################################
 ## Load all the required libraries
-## Author: Chaitanya R. Acharya
-## Last updated: July 13, 2023
+## Author: Joshua Ginzel
+## Last updated: December 2024
 ########################################################
 
 

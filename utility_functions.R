@@ -684,3 +684,19 @@ RunSeuratIntegration = function(h5_file_list){
   dat_int = FindClusters(dat_int,resolution=c(0.4,0.6,0.8),random.seed=123)
   return(dat_int)
 }
+
+###################################################################
+## Save multiple file types in one line
+###################################################################
+
+save_all <- function(filename, plot, width = 10, height = 8) {
+  ggsave(paste0(filename, ".png"), width = width, height = height, dpi = 300,  unit = "in")
+  ggsave(paste0(filename, ".pdf"),width = width, height = height, unit = "in")
+  ggsave(paste0(filename, ".svg"), width = width, height = height,  unit = "in")
+}
+
+save_all_p <- function(filename, plot, width = 10, height = 8) {
+  ggsave(paste0(filename, ".png"), plot, width = width, height = height, dpi = 300,  unit = "in")
+  ggsave(paste0(filename, ".pdf"), plot,width = width, height = height, unit = "in")
+  ggsave(paste0(filename, ".svg"),plot, width = width, height = height,  unit = "in")
+}

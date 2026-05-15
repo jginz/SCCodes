@@ -239,7 +239,7 @@ theme_scp <- function(aspect.ratio = NULL, base_size = 12, ...) {
 ##' @tissue_type is the unique character describing cell types
 ##' @plot plotting function for cell types
 
-RunSCType <- function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot=T){
+RunSCType_dep <- function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot=T){
   
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
@@ -324,7 +324,7 @@ RunSCType <- function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
 ##' @tissue_type is the unique character describing cell types
 ##' @plot plotting function for cell types
 
-RunSCType2 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot=T){
+RunSCType2_dep = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot=T){
   
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
@@ -397,7 +397,7 @@ RunSCType2 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
 }
 
 ##################################################################
-## Run SCType
+## Run SCType (Updated for v5)
 ###################################################################
 ## Main function
 
@@ -409,7 +409,7 @@ RunSCType2 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
 ##' @tissue_type is the unique character describing cell types
 ##' @plot plotting function for cell types
 
-RunSCType3 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot=T){
+RunSCType = function(seu,custom_gene_list=NULL,tissue_type="Lung",plot=T){
   
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/sctype_score_.R")
   source("https://raw.githubusercontent.com/IanevskiAleksandr/sc-type/master/R/gene_sets_prepare.R")
@@ -423,8 +423,7 @@ RunSCType3 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
   }
   
   set.seed(1)
-  es.max = sctype_score(as.matrix(GetAssayData(seu, slot = "data")), scaled = FALSE,
-                        gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
+  es.max = sctype_score(GetAssayData(seu, layer = "scale.data"), scaled = TRUE,gs = gs_list$gs_positive, gs2 = gs_list$gs_negative)
   
   cL_results = do.call("rbind", lapply(unique(seu@meta.data$Clusters), function(cl){
     es.max.cl = sort(rowSums(es.max[ ,rownames(seu@meta.data[seu@meta.data$Clusters==cl, ])]), decreasing = !0)
@@ -432,10 +431,10 @@ RunSCType3 = function(seu,custom_gene_list=NULL,tissue_type="Immune system",plot
   }))
   sctype_scores = cL_results %>% group_by(cluster) %>% top_n(n = 1, wt = scores)  
   sctype_scores$type[as.numeric(as.character(sctype_scores$scores)) < sctype_scores$ncells/4] = "Unknown"
-  seu@meta.data$SCType3 = ""
+  seu@meta.data$SCType2 = ""
   for(j in unique(sctype_scores$cluster)){
     cl_type = sctype_scores[sctype_scores$cluster==j,]; 
-    seu@meta.data$SCType3[seu@meta.data$Clusters == j] = as.character(cl_type$type[1])
+    seu@meta.data$SCType2[seu@meta.data$Clusters == j] = as.character(cl_type$type[1])
   }
   if(plot){
     # prepare edges
